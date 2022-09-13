@@ -3,7 +3,7 @@
     "description": "A free, open-source tetracompass logger",
     "appUrl": "./index.html",
     "configUrl": "./appconfig.json",
-    "iconUrl": "",
+    "iconUrl": "./images/Archaeology journal.png",
     "defaultWidth": 530,
     "defaultHeight": 490,
 	"minWidth": 530,
