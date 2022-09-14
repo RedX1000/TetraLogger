@@ -1,7 +1,7 @@
 # TetraLogger
 ### An open-source Alt1 Plugin designed for tracking Tetracompass rewards.
 #### Report bugs or questions, message me 🙂 -> Discord: RedX1000#3655
-#### RuneApps forum page: NONEXISTENT FOR NOW
+#### RuneApps forum page: https://runeapps.org/forums/viewtopic.php?id=1480
 
 <!--* *NOTE: This project is currently in maintenance mode as it is feature complete. There are some plans for new features but they are not a priority for now. If something breaks due to RuneScape updates or if there are bugs, message me on Discord.*-->
 
