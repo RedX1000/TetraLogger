@@ -761,6 +761,24 @@ footer {
   border-image: url(alt1-currentskin/borderB.png) 5 0 20 0 repeat;
 }
 
+#home_button{
+  position: absolute;
+  display: block;
+  left: -7px;
+}
+
+#home_button :hover {
+  filter: brightness(130%);
+}
+
+#home_button :active {
+  filter: brightness(160%);
+}
+
+#home_button_img {
+  width: 65%;
+}
+
 #info_button{
   margin: 8px auto auto;
   width: 82.35%;
