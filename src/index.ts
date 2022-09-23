@@ -300,9 +300,9 @@ export async function cleardb(choice: any) {
 	await historyClear();
 	historyInit();
 
-	(document.getElementById("number_of_chests") as HTMLSpanElement).textContent = "0";
-	(document.getElementById("value_of_chests") as HTMLSpanElement).textContent = "0";
-	(document.getElementById("average_of_chests") as HTMLSpanElement).textContent = "0";
+	(document.getElementById("number_of_rewards") as HTMLSpanElement).textContent = "0";
+	(document.getElementById("value_of_rewards") as HTMLSpanElement).textContent = "0";
+	(document.getElementById("average_of_rewards") as HTMLSpanElement).textContent = "0";
 	let divs = document.getElementsByClassName("loot_display") as HTMLCollectionOf<HTMLDivElement>;
 	for (let i = 0; i < divs.length; i++) {
 		divs[i].textContent = "";
@@ -1121,13 +1121,13 @@ async function addHistoryToLs(value: number, items: any, quants: any, reward: an
 
 function lootDisplay() {
 	//Set Number of clues and Current and Average values
-	(document.getElementById("number_of_chests") as HTMLSpanElement).textContent = parseInt(JSON.parse(localStorage.getItem("TetraLogger/Count"))).toLocaleString("en-US");
-	(document.getElementById("value_of_chests") as HTMLSpanElement).textContent = parseInt(JSON.parse(localStorage.getItem("TetraLogger/Value"))).toLocaleString("en-US");
+	(document.getElementById("number_of_rewards") as HTMLSpanElement).textContent = parseInt(JSON.parse(localStorage.getItem("TetraLogger/Count"))).toLocaleString("en-US");
+	(document.getElementById("value_of_rewards") as HTMLSpanElement).textContent = parseInt(JSON.parse(localStorage.getItem("TetraLogger/Value"))).toLocaleString("en-US");
 	if (parseInt(JSON.parse(localStorage.getItem("TetraLogger/Value"))) != 0) {
-		(document.getElementById("average_of_chests") as HTMLSpanElement).textContent = Math.round(parseInt(JSON.parse(localStorage.getItem("TetraLogger/Value"))) / parseInt(JSON.parse(localStorage.getItem("TetraLogger/Count")))).toLocaleString("en-US");
+		(document.getElementById("average_of_rewards") as HTMLSpanElement).textContent = Math.round(parseInt(JSON.parse(localStorage.getItem("TetraLogger/Value"))) / parseInt(JSON.parse(localStorage.getItem("TetraLogger/Count")))).toLocaleString("en-US");
 	}
 	else {
-		(document.getElementById("average_of_chests") as HTMLSpanElement).textContent = "0";
+		(document.getElementById("average_of_rewards") as HTMLSpanElement).textContent = "0";
 	}
 
 	//Set the icons in the tabs
