@@ -1944,7 +1944,7 @@ export function exporttocsv() {
 					quant = "";
 				} 
 				else { 
-					quant = "\"" + quant.toLocaleString("en-US") + "\""
+					quant = "\"" + quant.toString() + "\""
 				}
 				csvinfo.push([keys[j], quant]);
 				currOrder++;
@@ -1966,7 +1966,7 @@ export function exporttocsv() {
 					temp.push("")
 				}
 				else {
-					temp.push(lsHistory[i][1][(j * 8) + k] + " x " + lsHistory[i][0][(j * 8) + k])
+					temp.push(lsHistory[i][1][(j * 8) + k].toString() + " x " + lsHistory[i][0][(j * 8) + k].toString())
 				}
 			}
 		}
