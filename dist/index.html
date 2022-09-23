@@ -17,15 +17,17 @@
 				<div class="button_box">
 					<div class="capture_info" id="top">
 						<div class="capture_box_elements" id="math_box_count">
-							Ancient caskets logged: <span id="number_of_chests">0</span>
+							<u>Ancient caskets logged</u>: <span id="number_of_rewards">0</span>
 						</div>
 						<div class="capture_box_elements" id="math_box_total">
-							<u>Total value of logged caskets</u>
-							<div><span id="value_of_chests">0</span></div>
+							<u>Total value</u>: <span id="value_of_rewards">0</span>
 						</div>
 						<div class="capture_box_elements" id="math_box_average">
-							<u>Average value of logged caskets</u>
-							<div><span id="average_of_chests">0</span></div>
+							<u>Average value</u>: <span id="average_of_rewards">0</span>
+						</div>
+						<div id="bottom_buttons">
+							<div id="history_button" class="nisbutton" data-toggle="modal" data-target="#history">History</div>
+							<div id="insert_button" class="nisbutton" data-toggle="modal" data-target="#insert" onclick="clearVerify()">&nbsp;Insert&nbsp;</div>
 						</div>
 					</div>
 					<div class="main_buttons" id="top">
@@ -67,10 +69,6 @@
 							<div id="nineteenth_item" class="rewards"></div>
 							<div id="twentieth_item" class="rewards"></div>
 							<div id="twentyfirst_item" class="rewards"></div>
-						</div>
-						<div id="bottom_buttons">
-							<div id="history_button" class="nisbutton" data-toggle="modal" data-target="#history">History</div>
-							<div id="insert_button" class="nisbutton" data-toggle="modal" data-target="#insert" onclick="clearVerify()">&nbsp;Insert&nbsp;</div>
 						</div>
 					</div>
 				</div>
