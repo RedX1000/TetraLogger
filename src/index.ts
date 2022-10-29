@@ -1082,7 +1082,7 @@ async function submitToLS(item: any[], quant: any[], value: any) {
 }
 
 
-async function addHistoryToLs(value: number, items: any, quants: any, reward: any) {
+async function addHistoryToLs(value: number, item: any, quants: any, reward: any) {
 	// The order of how History items are logged
 	// Index 1: Items (Array)
 	// Index 2: Quantities (Array)
@@ -1091,11 +1091,11 @@ async function addHistoryToLs(value: number, items: any, quants: any, reward: an
 	// Index 5: reward count
 	// Index 6: History Primary Key
 	let itemsArr = []
-	for (let i = 0; i < items.length; i++) {
-		for (let j = 0; j < items[i].length; j++) {
-			console.log("Checking if",items[i][j],"is equal to","Blank")
-			if(items[i][j] !== "Blank" || items[i][j] != undefined){
-				itemsArr.push(items[i][j])
+	for (let i = 0; i < item.length; i++) {
+		for (let j = 0; j < item[i].length; j++) {
+			console.log("Checking if",item[i][j],"is equal to","Blank")
+			if(item[i][j] !== "Blank" || item[i][j] != undefined){
+				itemsArr.push(item[i][j])
 			}
 		}
 	}
@@ -1465,7 +1465,7 @@ export async function fetchFromGE() {
 		alt1.overLayTextEx("Fetching prices from GE...",a1lib.mixColor(255, 144, 0), 20, Math.round(alt1.rsWidth / 2), 200, 40000, "", true, true);
 	}
 
-	let items = []
+	let itemsList = []
 	let quants = []
 	let itemDivs = document.getElementsByClassName("items") as HTMLCollectionOf<HTMLSelectElement>
 	let quantDivs = document.getElementsByClassName("item_quants") as HTMLCollectionOf<HTMLInputElement>
@@ -1476,19 +1476,19 @@ export async function fetchFromGE() {
 		}
 		// OpenLogger relics.
 		if (["Saradomin page", "Guthix page", "Zamorak page", "Armadyl page", "Bandos page", "Ancient page"].includes(itemDivs[i].options[itemDivs[i].selectedIndex].value)) {	
-			items.push((itemDivs[i].options[itemDivs[i].selectedIndex].value) + " 1");
+			itemsList.push((itemDivs[i].options[itemDivs[i].selectedIndex].value) + " 1");
 		}
 		else if (["Ourg tower-goblin cower shield (damaged)"].includes(itemDivs[i].options[itemDivs[i].selectedIndex].value)) {
-			items.push((itemDivs[i].options[itemDivs[i].selectedIndex].value).replace("-","/"));
+			itemsList.push((itemDivs[i].options[itemDivs[i].selectedIndex].value).replace("-","/"));
 		}
 		else {   
-			items.push((itemDivs[i].options[itemDivs[i].selectedIndex].value));
+			itemsList.push((itemDivs[i].options[itemDivs[i].selectedIndex].value));
 		}
 		quants.push(parseInt(quantDivs[i].value));
 	}
-	if (seeConsoleLogs) console.log("Fetched items from GE are", items, "quants are", quants);
+	if (seeConsoleLogs) console.log("Fetched items from GE are", itemsList, "quants are", quants);
 
-	if (items.length == 0) {
+	if (itemsList.length == 0) {
 		if (window.alt1) {
 			alt1.overLayClearGroup("overlays");
 			alt1.overLaySetGroup("overlays");
@@ -1500,24 +1500,24 @@ export async function fetchFromGE() {
 	}
 
 	let prices = [];
-	for (let i = 0; i < items.length; i++) {
+	for (let i = 0; i < itemsList.length; i++) {
 		try {
-			await fetch("https://api.weirdgloop.org/exchange/history/rs/latest?name=" + items[i].replace("+","%2B").replace("+","%2B"))
+			await fetch("https://api.weirdgloop.org/exchange/history/rs/latest?name=" + itemsList[i].replace("+","%2B").replace("+","%2B"))
   				.then(function(response) {
   				  return response.json();
   				})
   				.then(function(data) {
-  				  prices.push(data[items[i]].price);
+  				  prices.push(data[itemsList[i]].price);
   				});
 		} catch (e) {
-			if (seeConsoleLogs) console.log(          "It failed... setting to 0...", items[i], items[i].replace("+","%2B").replace("+","%2B"));
+			if (seeConsoleLogs) console.log(          "It failed... setting to 0...", itemsList[i], itemsList[i].replace("+","%2B").replace("+","%2B"));
 			prices.push(0);
     	}
 	}
 
 	let grandTotal = 0;
-	for (let i = 0; i < items.length; i++) {
-		if (items[i] == "Coins") {
+	for (let i = 0; i < itemsList.length; i++) {
+		if (itemsList[i] == "Coins") {
 			grandTotal += quants[i];
 		}
 		else {
@@ -1538,7 +1538,7 @@ export async function fetchFromGE() {
 
 export function verifyInsert(event: Event) {
 	if (seeConsoleLogs) console.log("Collecting info from insert...");
-	let items = [];
+	let itemsList = [];
 	let quants = [];
 	let totalPrice = parseInt((document.getElementById("value_input") as HTMLInputElement).value);
 	let itemDivs = document.getElementsByClassName("items") as HTMLCollectionOf<HTMLSelectElement>;
@@ -1547,27 +1547,21 @@ export function verifyInsert(event: Event) {
 	removeChildNodes(document.getElementById("value_input") as HTMLDivElement);
 
 	for (let i = 0; i < 4; i++) {
-		let tempitems = []
 		for (let j = 0; j < 8; j++) {
-			console.log(i,j)
-			if (itemDivs[(i * 8) + j] == undefined){
+			if(itemDivs[(i * 8) + j] == undefined){
 				break;
 			}
 			if (itemDivs[(i * 8) + j].options[itemDivs[(i * 8) + j].selectedIndex].value == "Blank") {
 				continue;
 			}
-			tempitems.push(itemDivs[(i * 8) + j].options[itemDivs[(i * 8) + j].selectedIndex].value);
+			itemsList.push(itemDivs[(i * 8) + j].options[itemDivs[(i * 8) + j].selectedIndex].value);
+			quants.push(parseInt(quantDivs[(i * 8) + j].value));
 		}
-		items.push(tempitems)
 	}
+	if (seeConsoleLogs) console.log("items verifying are", itemsList, "quants are", quants);
 
-	for (let i = 0; i < itemDivs.length; i++) {
-		quants.push(parseInt(quantDivs[i].value));
-	}
-
-	if (seeConsoleLogs) console.log("items verifying are", items, "quants are", quants);
-
-	if (items.length == 0) {   
+	console.log(itemsList.length)
+	if (itemsList.length == 0) {   
 		if (window.alt1) {
 			alt1.overLayClearGroup("overlays");
 			alt1.overLaySetGroup("overlays");
@@ -1605,7 +1599,7 @@ export function verifyInsert(event: Event) {
 	let TPcheck = false
 	for (let j = 0; j < 4; j++) { // Navigating temp
 		for(let k = 0; k < 8; k++){
-			if(items[j][k] == "Blank" || items[j][k] == undefined){
+			if(itemsList[(j * 8) + k] == "Blank" || itemsList[(j * 8) + k] == undefined){
 				if(TPcheck){
 					break;
 				}
@@ -1640,8 +1634,8 @@ export function verifyInsert(event: Event) {
 				quantvar.textContent = "";
 			}
 			else {
-				imgvar = imgMaker(items[j][k]);
-				nodevar = nodeMaker(parseInt(quants[(j * 8) + k]), items[j][k], "history");
+				imgvar = imgMaker(itemsList[(j * 8) + k]);
+				nodevar = nodeMaker(parseInt(quants[(j * 8) + k]), itemsList[(j * 8) + k], "history");
 				quantvar = quantMaker(quants[(j * 8) + k]);
 			}
 
@@ -1659,7 +1653,7 @@ export function verifyInsert(event: Event) {
 	button.setAttribute('id','container'+ curr +'button');
 	button.textContent = "Sample";
 
-	insertVerif = [items, quants, totalPrice, "reward: [C] "];
+	insertVerif = [itemsList, quants, totalPrice, "reward: [C] "];
 
 	buttonbox.append(button);
 	container.append(buttonbox);
@@ -1673,32 +1667,43 @@ export function insertToDB() {
 	if (window.alt1) {
 		alt1.overLayClearGroup("overlays");
 		alt1.overLaySetGroup("overlays");
-		alt1.overLayTextEx("Submitting custom clue to Database...",
+		alt1.overLayTextEx("Submitting custom tetracompass reward to Database...",
 			a1lib.mixColor(255, 144, 0), 20, Math.round(alt1.rsWidth / 2), 200, 40000, "", true, true);
 	}
 
-	let items = insertVerif[0];
+	let itemsList = insertVerif[0];
+	let itemsList2D = []
+	console.log(itemsList)
 	for(let i = 0; i < 4; i++){
-		for(let j = items[i].length; j < 8; j++){
-			items[i].push("Blank")
+		let templist = []
+		for(let j = 0; j < 8; j++){
+			if(itemsList[(i * 8) + j] == undefined)
+				itemsList.push("Blank")
+			templist.push(itemsList[(i * 8) + j])
+		}
+		itemsList2D.push(templist)
+	}
+	console.log(itemsList)
+
+	for(let i = 0; i < 4; i++){
+		for(let j = 0; j < 8; j++){
 		}
 	}
-	console.log(items)
+	console.log(itemsList2D)
 
 	let quants = [];
 	for (let i = 0; i < insertVerif[1].length; i++) {
 		quants.push(insertVerif[1][i].toString());
 	}
-	for (let i = quants.length; i < cap; i++) {
-		quants.push("0");
-	}
+
+	console.log(quants)
 
 	let value = insertVerif[2];
 	let tier = insertVerif[3];
 	
 	insertInit();
-	submitToLS(items, quants, parseInt(value));
-	addHistoryToLs(parseInt(value), items, quants, tier);
+	submitToLS(itemsList2D, quants, parseInt(value));
+	addHistoryToLs(parseInt(value), itemsList2D, quants, tier);
 	lootDisplay();
 
 	if (window.alt1) {
