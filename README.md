@@ -166,7 +166,7 @@ To install with the direct link
     5. Click the link under "Local Storage" <br>
         - To Clear `localStorage` completely it can be done in one of two ways: <br>   
             1. Select "Completely Reset TetraLogger" in the Clear Options Menu and select "Reset Everything" (Easiest best choice). <br>
-            2. Right click the link under Local Storage and select "Clear". <br><br>
+            2. Within `localStorage`, filter by "TetraLogger" and remove every entry that starts with "TetraLogger". <br><br>
 
 * ### TetraLogger can be stretched out widthwise to display more of the loot in its display, as the top is flexy, and if you compress the bottom, you can have a minimal box for only seeing scanned items: 
     ![TetraLogger Tall Top](/Readme%20Images/TetraLogger%20Tall%20Top.png "TetraLogger Tall Top") <br>
