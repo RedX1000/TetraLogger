@@ -108,6 +108,14 @@ export async function initOnLoad() {
 }
 
 
+function tabChanger(){
+	let keys = Object.keys(items);
+	for(let i = 0; i < keys.length; i++){
+		items[keys[i]].tab = lsdb[keys[i]].tab
+	}
+}
+
+
 export async function init() {
 	buttonDisabler();
 
@@ -132,6 +140,7 @@ export async function init() {
 
 	items = JSON.parse(localStorage.getItem("TetraLogger/items"));
 
+	tabChanger()
 
 	if (seeConsoleLogs) console.log("LocalStorage items initialized.");
 
@@ -1144,9 +1153,9 @@ function tabDisplay() {
 	for (let i = 0; i < keys.length; i++) {
 		// Interesting tidbit: Comment out this if block to display every item, 
 		// but quantities will be undefined for the given tier if it doesn't exist in it.
-		if (items[keys[i]].quantity == undefined || items[keys[i]].quantity == 0) {
-			continue;
-		}
+		//if (items[keys[i]].quantity == undefined || items[keys[i]].quantity == 0) {
+		//	continue;
+		//}
 		console.log(keys[i])
 		let ele = document.getElementById(items[keys[i]].tab + "_loot") as HTMLDivElement;
 		let nodevar = document.createElement("itembox");
