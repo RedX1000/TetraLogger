@@ -140,6 +140,8 @@ export async function init() {
 
 	items = JSON.parse(localStorage.getItem("TetraLogger/items"));
 
+	// 11/08/2022: Exists for changing tab stuff. 
+	// Only important if youre a pre-existing user before this date.
 	tabChanger()
 
 	if (seeConsoleLogs) console.log("LocalStorage items initialized.");
