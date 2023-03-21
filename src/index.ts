@@ -9,10 +9,9 @@ import pixelmatch from "pixelmatch";
 import ClueRewardReader from "./scripts/rewardreader";
 import { ModalUIReader } from "./scripts/modeluireader";
 
-import * as lsdb from './JSONs/LocalStorageTetraInit.json';
-import * as itemsAll from './JSONs/ItemsAndImagesTetra.json';
-import * as itemsAllLegacy from './JSONs/ItemsAndImagesTetraLegacy.json';
-import { SlowBuffer } from "buffer";
+import * as lsdb from "./JSONs/LocalStorageTetraInit.json";
+import * as itemsAll from "./JSONs/ItemsAndImagesTetra.json";
+import * as itemsAllLegacy from "./JSONs/ItemsAndImagesTetraLegacy.json";
 
 /* 
 A couple of notes for development
@@ -319,7 +318,7 @@ export async function cleardb(choice: any) {
 	let ele = document.getElementById("history_body") as HTMLDivElement;
 	let container = document.createElement("div") as HTMLDivElement;
 	container.textContent = "There's nothing here to display. Start scanning!";
-	container.setAttribute('class','nothingToDisplayContainer');
+	container.setAttribute("class","nothingToDisplayContainer");
 	ele.append(container);
 
 	await historyClear();
@@ -674,8 +673,8 @@ async function findtrailComplete(img: ImgRef, autobool: boolean) {
 							}
 							let lsHistory = JSON.parse(localStorage.getItem("TetraLogger/History"))[JSON.parse(localStorage.getItem("TetraLogger/History")).length-1][0];
 							if (seeConsoleLogs) console.log("Checking arrays for equivalence:",JSON.parse(localStorage.getItem("TetraLogger/History"))[JSON.parse(localStorage.getItem("TetraLogger/History")).length-1][0], itemResultsNoBlanks);
-							if (lsHistory.join(',') === itemResultsNoBlanks.join(',')) { // https://stackoverflow.com/a/6230314
-								if (seeConsoleLogs) console.log(lsHistory.join(','),"and",itemResultsNoBlanks.join(','),"are the same...");
+							if (lsHistory.join(",") === itemResultsNoBlanks.join(",")) { // https://stackoverflow.com/a/6230314
+								if (seeConsoleLogs) console.log(lsHistory.join(","),"and",itemResultsNoBlanks.join(","),"are the same...");
 								if (seeConsoleLogs) console.log("They're the same. make it false.");
 								comparison = false;
 							}
@@ -955,7 +954,7 @@ async function readQuantities(item: ImageData) {
 
 	// Maybe consider this for optimizations :^?
 	let itemCan = document.createElement("canvas") as HTMLCanvasElement;
-	let itemCon = itemCan.getContext('2d');
+	let itemCon = itemCan.getContext("2d");
 	itemCan.width = item.width;
 	itemCan.height = item.height;
 	itemCon.putImageData(item, 0, 0);
@@ -1085,7 +1084,7 @@ async function submitToLS(item: any[], quant: any[], value: any) {
 
 			let tempQuant = quant[(i * 8) + j].slice();
 			console.log(tempQuant)
-			if (quant[(i * 8) + j].includes('k')) {
+			if (quant[(i * 8) + j].includes("k")) {
 				tempQuant = tempQuant.slice(0, -1);
 				tempQuant += "000";
 			}
@@ -1127,7 +1126,7 @@ async function addHistoryToLs(value: number, item: any, quants: any, reward: any
 	}
 	
 	for (let i = 0; i < quants.length; i++) {
-		if (quants[i].includes('k')) {
+		if (quants[i].includes("k")) {
 			quants[i] = quants[i].slice(0, -1);
 			quants[i] += "000";
 		}
@@ -1218,7 +1217,7 @@ function historyInit() {
 		let ele = document.getElementById("history_body");
 		let container = document.createElement("div") as HTMLDivElement;
 		container.textContent = "There's nothing to display. Start scanning!"
-		container.setAttribute('class','nothingToDisplayContainer')
+		container.setAttribute("class","nothingToDisplayContainer")
 		ele.append(container);
 	}
 	else {
@@ -1231,14 +1230,14 @@ function historyInit() {
 				let ele = document.getElementById("history_body") as HTMLDivElement;
 				let container = document.createElement("div") as HTMLDivElement;
 				container.setAttribute("class", "historyDisplayContainer");
-				container.setAttribute('id','container' + temp[5]);
+				container.setAttribute("id","container" + temp[5]);
 
 				let dateBox = document.createElement("div") as HTMLDivElement;
 				let dateImg = document.createElement("div") as HTMLDivElement;
 				
-				dateBox.setAttribute('class', 'dateBox')
-				dateImg.setAttribute('class', 'dateImage')
-				dateImg.setAttribute('title', 'Date Captured: ' + temp[6])
+				dateBox.setAttribute("class", "dateBox")
+				dateImg.setAttribute("class", "dateImage")
+				dateImg.setAttribute("title", "Date Captured: " + temp[6])
 			
 				dateBox.append(dateImg)
 				container.append(dateBox)
@@ -1252,20 +1251,20 @@ function historyInit() {
 
 					let count = document.createElement("div") as HTMLDivElement;
 					count.innerHTML = countText;
-					count.setAttribute('class', 'historyCount');
+					count.setAttribute("class", "historyCount");
 					count.append(customSpan);
 					container.append(count);
 				}
 				else {
 					let count = document.createElement("div") as HTMLDivElement;
 					count.textContent = "Casket reward: " + index;
-					count.setAttribute('class', 'historyCount');
+					count.setAttribute("class", "historyCount");
 					container.append(count);
 				}
 
 				let value = document.createElement("div") as HTMLDivElement;
 				value.textContent = "Reward Value: "+temp[2].toLocaleString("en-US");
-				value.setAttribute('class','historyValue');
+				value.setAttribute("class","historyValue");
 				container.append(value);
 				
 				let TPcheck = false
@@ -1319,11 +1318,11 @@ function historyInit() {
 			
 				let buttonbox = document.createElement("div") as HTMLDivElement;
 				let button = document.createElement("div") as HTMLDivElement;
-				buttonbox.setAttribute('class','buttonboxHistory');
-				buttonbox.setAttribute('id','container'+temp[5]+'buttonbox');
-				button.setAttribute('class','nisbutton historyButtonStyle');
-				button.setAttribute('id','container'+temp[5]+'button');
-				button.setAttribute('onClick','TEST.rollbackVeri("container'+temp[5]+'button")');
+				buttonbox.setAttribute("class","buttonboxHistory");
+				buttonbox.setAttribute("id","container"+temp[5]+"buttonbox");
+				button.setAttribute("class","nisbutton historyButtonStyle");
+				button.setAttribute("id","container"+temp[5]+"button");
+				button.setAttribute("onClick","TEST.rollbackVeri(\"container"+temp[5]+"button\")");
 				button.textContent = "Delete";
 
 				buttonbox.append(button);
@@ -1341,7 +1340,7 @@ function historyInit() {
 			let ele = document.getElementById("history_body") as HTMLDivElement;
 			let container = document.createElement("div") as HTMLDivElement;
 			container.textContent = "There's nothing to display. Start scanning!";
-			container.setAttribute('class','nothingToDisplayContainer');
+			container.setAttribute("class","nothingToDisplayContainer");
 			ele.append(container);
 		}
 	}
@@ -1356,14 +1355,14 @@ export function rollbackVeri(id: any) {
 	let buttonYes = document.createElement("div") as HTMLDivElement;
 	let buttonNo = document.createElement("div") as HTMLDivElement;
 
-	buttonbox.setAttribute('class','buttonBoxHistoryVerify');
+	buttonbox.setAttribute("class","buttonBoxHistoryVerify");
 
-	buttonYes.setAttribute('class','nisbutton buttonVerif');
-	buttonYes.setAttribute('onclick','TEST.rollbackYes("'+id+'")');
+	buttonYes.setAttribute("class","nisbutton buttonVerif");
+	buttonYes.setAttribute("onclick","TEST.rollbackYes(\""+id+"\")");
 	buttonYes.textContent = "Yes";
 
-	buttonNo.setAttribute('class','nisbuttonblue buttonVerif');
-	buttonNo.setAttribute('onclick','TEST.rollbackNo("'+id+'")');
+	buttonNo.setAttribute("class","nisbuttonblue buttonVerif");
+	buttonNo.setAttribute("onclick","TEST.rollbackNo(\""+id+"\")");
 	buttonNo.textContent = "No";
 
 	buttonbox.append(buttonYes, buttonNo);
@@ -1378,10 +1377,10 @@ export function rollbackYes(id: any) {
 	}
 	if (seeConsoleLogs) console.log("Rolling back reward from history...");
 
-	let container = document.getElementById(id.replace('button', '')) as HTMLDivElement;
+	let container = document.getElementById(id.replace("button", "")) as HTMLDivElement;
 	container.remove();
 
-	let pKey = parseInt(id.replace('container','').replace('button',''));
+	let pKey = parseInt(id.replace("container","").replace("button",""));
 
 	let lsHistory = JSON.parse(localStorage.getItem("TetraLogger/History"));
 	let temp = [];
@@ -1420,7 +1419,7 @@ export function rollbackYes(id: any) {
 		}
 	}
 
-	let historyCount = document.getElementsByClassName('historyCount') as HTMLCollectionOf<HTMLDivElement>;
+	let historyCount = document.getElementsByClassName("historyCount") as HTMLCollectionOf<HTMLDivElement>;
 	let index = parseInt(localStorage.getItem("TetraLogger/Count"));
 	for (let i = 0; i < parseInt(localStorage.getItem("TetraLogger/Count")); i++) {
 		if (i >= parseInt(localStorage.getItem("TetraLogger/RollbackDisplayLimit"))) {
@@ -1448,12 +1447,12 @@ export function rollbackYes(id: any) {
 export function rollbackNo(id: any) {
 	let buttonbox = document.getElementById(id+"box") as HTMLDivElement;
 	removeChildNodes(buttonbox);
-	buttonbox.setAttribute('class','buttonboxHistory');
+	buttonbox.setAttribute("class","buttonboxHistory");
 	
 	let button = document.createElement("div") as HTMLDivElement;
-	button.setAttribute('class','nisbutton historyButtonStyle');
-	button.setAttribute('id', id);
-	button.setAttribute('onClick','TEST.rollbackVeri("'+id+'")');
+	button.setAttribute("class","nisbutton historyButtonStyle");
+	button.setAttribute("id", id);
+	button.setAttribute("onClick","TEST.rollbackVeri(\""+id+"\")");
 	button.textContent = "Delete";
 
 	buttonbox.append(button);
@@ -1478,7 +1477,7 @@ async function insertInit() {
 	});
 
 	let itemBoxes = document.getElementsByClassName("items") as HTMLCollectionOf<HTMLSelectElement>;
-	let quantBoxes = document.getElementsByClassName("item_quants") as HTMLCollectionOf<HTMLInputElement>;
+	let quantBoxes = document.getElementsByClassName("insert_text") as HTMLCollectionOf<HTMLInputElement>;
 	let valueBox = document.getElementById("value_input") as HTMLInputElement;
 	valueBox.value = "0";
 
@@ -1487,10 +1486,10 @@ async function insertInit() {
 		quantBoxes[i].value = "0";
 
 		for (let j = 0; j < list.length; j++) {
-			let option = document.createElement('option') as HTMLOptionElement;
+			let option = document.createElement("option") as HTMLOptionElement;
 			option.value = list[j][0].toString();
 			option.textContent = list[j][1].toString();
-			option.setAttribute('class', "insert_options");
+			option.setAttribute("class", "insert_options");
 			itemBoxes[i].append(option);
 		}
 	}
@@ -1507,7 +1506,7 @@ export async function fetchFromGE() {
 	let itemsList = []
 	let quants = []
 	let itemDivs = document.getElementsByClassName("items") as HTMLCollectionOf<HTMLSelectElement>
-	let quantDivs = document.getElementsByClassName("item_quants") as HTMLCollectionOf<HTMLInputElement>
+	let quantDivs = document.getElementsByClassName("insert_text") as HTMLCollectionOf<HTMLInputElement>
 
 	for (let i = 0; i < itemDivs.length; i++) {
 		if (itemDivs[i].options[itemDivs[i].selectedIndex].value == "Blank") {
@@ -1581,7 +1580,7 @@ export async function verifyInsert(event: Event) {
 	let quants = [];
 	let totalPrice = parseInt((document.getElementById("value_input") as HTMLInputElement).value);
 	let itemDivs = document.getElementsByClassName("items") as HTMLCollectionOf<HTMLSelectElement>;
-	let quantDivs = document.getElementsByClassName("item_quants") as HTMLCollectionOf<HTMLInputElement>;
+	let quantDivs = document.getElementsByClassName("insert_text") as HTMLCollectionOf<HTMLInputElement>;
 
 	removeChildNodes(document.getElementById("value_input") as HTMLDivElement);
 
@@ -1615,15 +1614,15 @@ export async function verifyInsert(event: Event) {
 	let curr = (parseInt(localStorage.getItem("TetraLogger/Count")) + 1).toString();
 	let ele = document.getElementById("insertVerif_body") as HTMLDivElement;
 	let container = document.createElement("div") as HTMLDivElement;
-	container.setAttribute("class", 'historyDisplayContainer');
-	container.setAttribute('id','container' + curr);
+	container.setAttribute("class", "historyDisplayContainer");
+	container.setAttribute("id","container" + curr);
 
 	let dateBox = document.createElement("div") as HTMLDivElement;
 	let dateImg = document.createElement("div") as HTMLDivElement;
 	
-	dateBox.setAttribute('class', 'dateBox')
-	dateImg.setAttribute('class', 'dateImage')
-	dateImg.setAttribute('title', 'Date Captured: ' + (await dateGetter()))
+	dateBox.setAttribute("class", "dateBox")
+	dateImg.setAttribute("class", "dateImage")
+	dateImg.setAttribute("title", "Date Captured: " + (await dateGetter()))
 
 	dateBox.append(dateImg)
 	container.append(dateBox)
@@ -1636,13 +1635,13 @@ export async function verifyInsert(event: Event) {
 	let countText = "ancient casket" + ": " + curr;
 	let count = document.createElement("div") as HTMLDivElement;
 	count.innerHTML = countText;
-	count.setAttribute('class','historyCount');
+	count.setAttribute("class","historyCount");
 	count.append(customSpan);
 	container.append(count);
 
 	let value = document.createElement("div") as HTMLDivElement;
 	value.textContent = "Reward Value: " + totalPrice.toLocaleString("en-US");
-	value.setAttribute('class','historyValue');
+	value.setAttribute("class","historyValue");
 	container.append(value);
 
 	let TPcheck = false
@@ -1696,10 +1695,10 @@ export async function verifyInsert(event: Event) {
 	
 	let buttonbox = document.createElement("div") as HTMLDivElement;
 	let button = document.createElement("div") as HTMLDivElement;
-	buttonbox.setAttribute('class','buttonboxHistory');
-	buttonbox.setAttribute('id','container'+ curr +'buttonbox');
-	button.setAttribute('class','nisbutton historyButtonStyle');
-	button.setAttribute('id','container'+ curr +'button');
+	buttonbox.setAttribute("class","buttonboxHistory");
+	buttonbox.setAttribute("id","container"+ curr +"buttonbox");
+	button.setAttribute("class","nisbutton historyButtonStyle");
+	button.setAttribute("id","container"+ curr +"button");
 	button.textContent = "Sample";
 
 	insertVerif = [itemsList, quants, totalPrice, "reward: [C] "];
@@ -2008,13 +2007,13 @@ export function exporttocsv() {
 	}
 	csvinfo.push([])
 	csvinfo.push([])
-	csvinfo.push(["Captured Rewards History", 'Parse tier at " : " and " [C] "', '"Parse date and time at "", " "', 'Parse items at " x "'])
+	csvinfo.push(["Captured Rewards History", "Parse tier at \" : \" and \" [C] \"", "\"Parse date and time at \"\", \" \"" , "Parse items at \" x \""])
 	csvinfo.push(["Rewards Tier & Count", "Reward Value", "Date and Time recorded", "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12", "Item 13", "Item 14", "Item 15", "Item 16", "Item 17", "Item 18", "Item 19", "Item 20", "Item 21"])
 	console.log(lsHistory)
 	if (seeConsoleLogs) console.log("Setting history in csv...")
 	for (let i = 0; i < lsHistory.length; i++) {
 		lsHistory[i][4] = i + 1
-		let temp = [lsHistory[i][3] + " : " + lsHistory[i][4], lsHistory[i][2], '"' + lsHistory[i][6].toString() + '"']
+		let temp = [lsHistory[i][3] + " : " + lsHistory[i][4], lsHistory[i][2], "\"" + lsHistory[i][6].toString() + "\""]
 		for (let j = 0; j < 4; j++) {
 			for(let k = 0; k < 8; k++){
 				if(lsHistory[i][0][(j * 8) + k] == undefined || lsHistory[i][0][(j * 8) + k] === "Blank"){
@@ -2060,7 +2059,7 @@ function nodeMaker(quant: number, item: string, attribute:string) {
 	let nodevar = document.createElement("itembox") as HTMLDivElement
 	if (attribute === "tab") {
 		nodevar.setAttribute("class", "node_tab")
-		nodevar.setAttribute('style', 'order: ' + orderChecker(parseInt(items[item].order), item) + ';');
+		nodevar.setAttribute("style", "order: " + orderChecker(parseInt(items[item].order), item) + ";");
 	}
 	else if (attribute === "history") {
 		nodevar.setAttribute("class", "node_history")
@@ -2068,7 +2067,7 @@ function nodeMaker(quant: number, item: string, attribute:string) {
 	else if (attribute === "recent") {
 		nodevar.setAttribute("class", "node_recent")
 	}
-	nodevar.setAttribute('title', quant.toLocaleString("en-US") + " x " + item)
+	nodevar.setAttribute("title", quant.toLocaleString("en-US") + " x " + item)
 	return nodevar
 
 }
@@ -2086,7 +2085,7 @@ function imgMaker(item: string, quant:number) {
 	else
 		imgvar.src = encodeURI("./images/items/" + item.replace("/","-") + ".png");
 	
-	imgvar.setAttribute('style', 'margin:auto;');
+	imgvar.setAttribute("style", "margin:auto;");
 	imgvar.ondragstart = function() { return false; };
 	return imgvar
 }
@@ -2096,15 +2095,15 @@ function quantMaker(quant: number) {
 	let quantvar = document.createElement("span") as HTMLSpanElement
 
 	if (quant > 9999999 || quant < -9999999) {
-		quantvar.setAttribute('class', 'quant_green_text');
+		quantvar.setAttribute("class", "quant_green_text");
 		quantvar.textContent = Math.trunc(quant / 1000000).toString() + "M";
 	}
 	else if (quant > 99999 || quant > 9999 || quant < -9999 || quant < -99999) {
-		quantvar.setAttribute('class', 'quant_white_text');
+		quantvar.setAttribute("class", "quant_white_text");
 		quantvar.textContent = Math.trunc(quant / 1000).toString() + "k";
 	}
 	else {
-		quantvar.setAttribute('class', 'quant_yellow_text');
+		quantvar.setAttribute("class", "quant_yellow_text");
 		quantvar.textContent = quant + "";
 	}
 	return quantvar
@@ -2133,11 +2132,11 @@ function removeChildNodes(div: any) { // https://stackoverflow.com/a/40606838
 function _base64ToImageData(buffer: string, width: any, height: any) { // https://stackoverflow.com/questions/68495924
     return new Promise(resolve => {
   	  	let image = new Image();
-  	  	image.addEventListener('load', function (e) {
-  	  	  	let canvasElement = document.createElement('canvas') as HTMLCanvasElement;
+  	  	image.addEventListener("load", function (e) {
+  	  	  	let canvasElement = document.createElement("canvas") as HTMLCanvasElement;
   	  	  	canvasElement.width = width;
   	  	  	canvasElement.height = height;
-  	  	  	let context = canvasElement.getContext('2d');
+  	  	  	let context = canvasElement.getContext("2d");
   	  	  	context.drawImage(e.target as HTMLVideoElement, 0, 0, width, height);
   	  	  	resolve(context.getImageData(0, 0, width, height));
   	  	});
@@ -2147,26 +2146,26 @@ function _base64ToImageData(buffer: string, width: any, height: any) { // https:
 
 
 export function toggleLootDisplay(id: string) {
-	let lootdisplay = Array.from(document.getElementsByClassName('loot_display') as HTMLCollectionOf<HTMLElement>);
+	let lootdisplay = Array.from(document.getElementsByClassName("loot_display") as HTMLCollectionOf<HTMLElement>);
 	let tab = document.getElementById(id) as HTMLInputElement;
 
 	if (id == "artifacts_rewards") {
-		lootdisplay[0].style.display = (lootdisplay[0].style.display == 'flex') ? 'none' : 'flex';
-		tab.style.textDecoration = (lootdisplay[0].style.display == 'flex') ? 'none' : 'line-through';
-		tab.title = (lootdisplay[0].style.display == 'flex') ? 'Click here to hide broadcast rewards' : 'Click here to show broadcast rewards';
-		opentabs[0] = (lootdisplay[0].style.display == 'flex') ? true : false;
+		lootdisplay[0].style.display = (lootdisplay[0].style.display == "flex") ? "none" : "flex";
+		tab.style.textDecoration = (lootdisplay[0].style.display == "flex") ? "none" : "line-through";
+		tab.title = (lootdisplay[0].style.display == "flex") ? "Click here to hide broadcast rewards" : "Click here to show broadcast rewards";
+		opentabs[0] = (lootdisplay[0].style.display == "flex") ? true : false;
 	}
 	else if (id == "materials_rewards") {
-		lootdisplay[1].style.display = (lootdisplay[1].style.display == 'flex') ? 'none' : 'flex';
-		tab.style.textDecoration = (lootdisplay[1].style.display == 'flex') ? 'none' : 'line-through';
-		tab.title = (lootdisplay[1].style.display == 'flex') ? 'Click here to hide miscellaneous rewards' : 'Click here to show miscellaneous rewards';
-		opentabs[1] = (lootdisplay[1].style.display == 'flex') ? true : false;
+		lootdisplay[1].style.display = (lootdisplay[1].style.display == "flex") ? "none" : "flex";
+		tab.style.textDecoration = (lootdisplay[1].style.display == "flex") ? "none" : "line-through";
+		tab.title = (lootdisplay[1].style.display == "flex") ? "Click here to hide miscellaneous rewards" : "Click here to show miscellaneous rewards";
+		opentabs[1] = (lootdisplay[1].style.display == "flex") ? true : false;
 	}
 	else if (id == "miscellaneous_rewards") {
-		lootdisplay[2].style.display = (lootdisplay[2].style.display == 'flex') ? 'none' : 'flex';
-		tab.style.textDecoration = (lootdisplay[2].style.display == 'flex') ? 'none' : 'line-through';
-		tab.title = (lootdisplay[2].style.display == 'flex') ? 'Click here to hide miscellaneous rewards' : 'Click here to show miscellaneous rewards';
-		opentabs[2] = (lootdisplay[2].style.display == 'flex') ? true : false;
+		lootdisplay[2].style.display = (lootdisplay[2].style.display == "flex") ? "none" : "flex";
+		tab.style.textDecoration = (lootdisplay[2].style.display == "flex") ? "none" : "line-through";
+		tab.title = (lootdisplay[2].style.display == "flex") ? "Click here to hide miscellaneous rewards" : "Click here to show miscellaneous rewards";
+		opentabs[2] = (lootdisplay[2].style.display == "flex") ? true : false;
 	}
 	if (seeConsoleLogs) console.log(opentabs)
 
@@ -2196,25 +2195,26 @@ export function toggleLootDisplay(id: string) {
 	minHval = "80px"
 
 	if (opentabs[0]) {
-		Array.from(document.getElementsByClassName('artifacts') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = minHval;
+		(document.getElementById("artifacts") as HTMLElement).style.minHeight = minHval;
 	}
 	else {
-		Array.from(document.getElementsByClassName('artifacts') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = "8%";
+		(document.getElementById("artifacts") as HTMLElement).style.minHeight = "8%";
 	}
 
 	if (opentabs[1]) {
-		Array.from(document.getElementsByClassName('materials') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = minHval;
+		(document.getElementById("materials") as HTMLElement).style.minHeight = minHval;
 	}
 	else {
-		Array.from(document.getElementsByClassName('materials') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = "8%";
+		(document.getElementById("materials") as HTMLElement).style.minHeight = "8%";
 	}
 
 	if (opentabs[2]) {
-		Array.from(document.getElementsByClassName('miscellaneous') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = minHval;
+		(document.getElementById("miscellaneous") as HTMLElement).style.minHeight = minHval;
 	}
 	else {
-		Array.from(document.getElementsByClassName('miscellaneous') as HTMLCollectionOf<HTMLElement>)[0].style.minHeight = "8%";
+		(document.getElementById("miscellaneous") as HTMLElement).style.minHeight = "8%";
 	}
+
 }
 
 
